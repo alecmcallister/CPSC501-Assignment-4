@@ -4,7 +4,7 @@ Lines I changed in predict.py:
 
     model = tf.keras.models.load_model(sys.argv[2])
 
-    prediction = model.predict(img)
+    prediction = model.predict(img)[0]
 
     predicted_label = np.argmax(prediction)
 
@@ -18,9 +18,9 @@ Hyper-Parameters (Before):
 
 Model: Sequential (5 layers)
 1: Input layer (size = 784)
-2: Dense layer (size = 200, activation = relu (rectified linear unit)
+2: Dense layer (size = 200, activation = relu)
 3: Dropout layer (rate = 0.2)
-4: Dense layer (size = 100, activation = relu (rectified linear unit)
+4: Dense layer (size = 100, activation = relu)
 5: Output layer (size = 10, activation = softmax)
 
 Optimizer: adam (stochastic gradient descent)
@@ -30,22 +30,66 @@ Epochs: 6
 
 Results:
 
-Train on 60000 samples
-Epoch 1/6
-60000/60000 - 4s - loss: 0.6259 - accuracy: 0.8158
-Epoch 2/6
-60000/60000 - 3s - loss: 0.4980 - accuracy: 0.8502
-Epoch 3/6
-60000/60000 - 3s - loss: 0.4512 - accuracy: 0.8628
-Epoch 4/6
-60000/60000 - 3s - loss: 0.4188 - accuracy: 0.8720
-Epoch 5/6
-60000/60000 - 3s - loss: 0.3897 - accuracy: 0.8792
-Epoch 6/6
-60000/60000 - 3s - loss: 0.3798 - accuracy: 0.8822
---Evaluate model--
-10000/1 - 0s - loss: 0.1509 - accuracy: 0.9356
-Model Loss:    0.22
-Model Accuracy: 93.6%
+    Train on 60000 samples
+    Epoch 1/6
+    60000/60000 - 4s - loss: 0.6259 - accuracy: 0.8158
+    Epoch 2/6
+    60000/60000 - 3s - loss: 0.4980 - accuracy: 0.8502
+    Epoch 3/6
+    60000/60000 - 3s - loss: 0.4512 - accuracy: 0.8628
+    Epoch 4/6
+    60000/60000 - 3s - loss: 0.4188 - accuracy: 0.8720
+    Epoch 5/6
+    60000/60000 - 3s - loss: 0.3897 - accuracy: 0.8792
+    Epoch 6/6
+    60000/60000 - 3s - loss: 0.3798 - accuracy: 0.8822
+    --Evaluate model--
+    10000/1 - 0s - loss: 0.1509 - accuracy: 0.9356
+    Model Loss:    0.22
+    Model Accuracy: 93.6%
 
 Of my 10 created images, 3 were classified incorrectly (B, C, E).
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ AFTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I decided to change the model to a CNN after looking at a few examples online.
+The training speed slowed down a LOT, but the 10 images were all successfully classified (with better certainty as well).
+I put the final prediction images inside the Results folder, so you can compare the before/ after models.
+
+Since the input layer for a CNN is different, I had to change a line in predict.py from:
+
+    prediction = model.predict(img)[0]
+
+to:
+
+    prediction = model.predict(img.reshape(img.shape[0], 28, 28, 1))[0]
+
+
+Hyper-Parameters (After):
+
+Model: CNN (9 layers (not including normalization/ relu))
+
+Optimizer: adam (stochastic gradient descent)
+Loss: sparse categorical cross-entropy
+
+Also uses ImageDataGenerators to distort the training/ testing images (for less overfitting)
+
+Epochs: 5
+
+Results:
+
+    Epoch 1/5
+    937/937 [==============================] - 142s 151ms/step - loss: 0.5672 - accuracy: 0.8289 - val_loss: 0.2066 - val_accuracy: 0.9361
+    Epoch 2/5
+    937/937 [==============================] - 133s 142ms/step - loss: 0.4200 - accuracy: 0.8742 - val_loss: 0.1848 - val_accuracy: 0.9433
+    Epoch 3/5
+    937/937 [==============================] - 133s 142ms/step - loss: 0.3765 - accuracy: 0.8862 - val_loss: 0.1557 - val_accuracy: 0.9541
+    Epoch 4/5
+    937/937 [==============================] - 133s 142ms/step - loss: 0.3531 - accuracy: 0.8931 - val_loss: 0.1394 - val_accuracy: 0.9554
+    Epoch 5/5
+    937/937 [==============================] - 133s 142ms/step - loss: 0.3368 - accuracy: 0.8980 - val_loss: 0.1472 - val_accuracy: 0.9551
+    --Evaluate model--
+    10000/1 - 3s - loss: 0.1231 - accuracy: 0.9552
+    Model Loss:    0.15
+    Model Accuracy: 95.5%

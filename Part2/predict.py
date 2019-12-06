@@ -20,7 +20,7 @@ def main():
 def predict(model, class_names, img, true_label):
     img = np.array([img])
     #Replace these two lines with code to make a prediction
-    prediction = model.predict(img)[0]
+    prediction = model.predict(img.reshape(img.shape[0], 28, 28, 1))[0]
     #Determine what the predicted label is
     predicted_label = np.argmax(prediction)
     plot(class_names, prediction, true_label, predicted_label, img[0])
