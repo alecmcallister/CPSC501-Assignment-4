@@ -1,0 +1,51 @@
+notMNIST Report
+
+Lines I changed in predict.py:
+
+    model = tf.keras.models.load_model(sys.argv[2])
+
+    prediction = model.predict(img)
+
+    predicted_label = np.argmax(prediction)
+
+So when I tried to run the interactive, and grabimage scripts, they would produce incorrect images (on macOS Catalina at least).
+It seems like the scripts didn't properly account for the size of the toolbar in the canvas window, or the actual canvas position, so it never really captures the image drawn.
+Instead of using the included image generators, I chose to draw the letters using GIMP.
+
+The model is similar to the one I used in part 1, but with another dense hidden layer before the output.
+
+Hyper-Parameters (Before):
+
+Model: Sequential (5 layers)
+1: Input layer (size = 784)
+2: Dense layer (size = 200, activation = relu (rectified linear unit)
+3: Dropout layer (rate = 0.2)
+4: Dense layer (size = 100, activation = relu (rectified linear unit)
+5: Output layer (size = 10, activation = softmax)
+
+Optimizer: adam (stochastic gradient descent)
+Loss: sparse categorical cross-entropy
+
+Epochs: 6
+
+Results:
+
+Train on 60000 samples
+Epoch 1/6
+60000/60000 - 4s - loss: 0.6259 - accuracy: 0.8158
+Epoch 2/6
+60000/60000 - 3s - loss: 0.4980 - accuracy: 0.8502
+Epoch 3/6
+60000/60000 - 3s - loss: 0.4512 - accuracy: 0.8628
+Epoch 4/6
+60000/60000 - 3s - loss: 0.4188 - accuracy: 0.8720
+Epoch 5/6
+60000/60000 - 3s - loss: 0.3897 - accuracy: 0.8792
+Epoch 6/6
+60000/60000 - 3s - loss: 0.3798 - accuracy: 0.8822
+--Evaluate model--
+10000/1 - 0s - loss: 0.1509 - accuracy: 0.9356
+Model Loss:    0.22
+Model Accuracy: 93.6%
+
+Of my 10 created images, 3 were classified incorrectly (B, C, E).

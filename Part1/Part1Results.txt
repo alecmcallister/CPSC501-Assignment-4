@@ -8,7 +8,7 @@ I played around with using various epoch amounts, and found anything past 4 prod
 All-in-all, most of what I did was tweak the parameters until I got a model with 99%/ 98% training/ test accuracy.
 
 
-Hyper-Paramerers:
+Hyper-Parameters:
 
 Model: Sequential (4 layers)
 1: Input layer (size = 784)
@@ -44,4 +44,4 @@ Epoch 8/8
 --Evaluate model--
 10000/1 - 0s - loss: 0.0326 - accuracy: 0.9810
 Model Loss:    0.06
-Model Accuray: 98.1%
+Model Accuracy: 98.1%

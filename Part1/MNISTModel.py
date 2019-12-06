@@ -24,7 +24,7 @@ model.fit(x_train, y_train, epochs=8, verbose=2)
 print("--Evaluate model--")
 model_loss, model_acc = model.evaluate(x_test,  y_test, verbose=2)
 print(f"Model Loss:    {model_loss:.2f}")
-print(f"Model Accuray: {model_acc*100:.1f}%")
+print(f"Model Accuracy: {model_acc*100:.1f}%")
 
 #Save Model
 model.save("Part1/MNIST_4.h5")
