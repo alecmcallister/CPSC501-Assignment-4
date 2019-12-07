@@ -8,6 +8,17 @@ from tensorflow import keras
 train_file_path = 'heart_train.csv'  # 396 rows
 test_file_path = 'heart_test.csv'  # 66 rows
 
+columns_to_normalize = {
+    'sbp': 218,
+    'tobacco': 31.2,
+    'ldl': 15.33,
+    'adiposity': 42.49,
+    'typea': 78,
+    'obesity': 46.58,
+    'alcohol': 147.19,
+    'age': 64
+}
+
 
 def prepare_dataset(path):
     df = pd.read_csv(path)
@@ -15,11 +26,17 @@ def prepare_dataset(path):
     df['famhist'] = df.famhist.cat.codes
     df.pop('row.names')
 
+    for column, max in columns_to_normalize.items():
+        df[column] = df[column] / max
+
     target = df.pop('chd')
     dataset = tf.data.Dataset.from_tensor_slices((df.values, target.values))
     shuffled_dataset = dataset.shuffle(len(df)).batch(1).repeat()
 
     return shuffled_dataset, df
+
+
+# dataset, df = prepare_dataset('heart.csv')
 
 
 train_dataset, train_df = prepare_dataset(train_file_path)
@@ -48,3 +65,4 @@ model.fit(train_dataset, epochs=7, steps_per_epoch=train_df.shape[0])
 model_loss, model_acc = model.evaluate(test_dataset, steps=test_df.shape[0],  verbose=2)
 print(f"Model Loss:     {model_loss:.2f}")
 print(f"Model Accuracy: {model_acc*100:.1f}%")
+

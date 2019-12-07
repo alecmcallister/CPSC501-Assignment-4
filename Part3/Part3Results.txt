@@ -47,4 +47,27 @@ Results:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ AFTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TBD
+By simply normalizing the data (heart_train.csv, and heart_test.csv),
+the accuracy increased to ~79% without changing anything else in the model.
+
+
+Results:
+
+Train for 396 steps
+Epoch 1/7
+396/396 [==============================] - 1s 3ms/step - loss: 0.6541 - accuracy: 0.6490
+Epoch 2/7
+396/396 [==============================] - 0s 1ms/step - loss: 0.6346 - accuracy: 0.6465
+Epoch 3/7
+396/396 [==============================] - 0s 1ms/step - loss: 0.6114 - accuracy: 0.6338
+Epoch 4/7
+396/396 [==============================] - 0s 1ms/step - loss: 0.5919 - accuracy: 0.6768
+Epoch 5/7
+396/396 [==============================] - 0s 1ms/step - loss: 0.5898 - accuracy: 0.6742
+Epoch 6/7
+396/396 [==============================] - 0s 1ms/step - loss: 0.5781 - accuracy: 0.6793
+Epoch 7/7
+396/396 [==============================] - 0s 1ms/step - loss: 0.5861 - accuracy: 0.6944
+66/66 - 0s - loss: 0.5505 - accuracy: 0.7879
+Model Loss:     0.55
+Model Accuracy: 78.8%
