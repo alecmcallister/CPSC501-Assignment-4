@@ -1,4 +1,50 @@
 CHDModel Report
 
-396 train
-66 test
+I manually split up heart.csv into two parts:
+    heart_train.csv: 396 rows
+    heart_test.csv:  66  rows
+
+I decided to follow Tensorflow's CSV reading tutorial that makes use of DataFrames from pandas,
+since their example uses data from a CSV with a small number of rows (~300).
+
+Hyper-Parameters (Before):
+
+Model: Sequential (6 layers)
+1: Dense layer (size = 9, activation = relu)
+2: Dense layer (size = 20, activation = relu)
+3: Dropout layer (rate = 0.2)
+4: Dense layer (size = 10, activation = relu)
+5: Dropout layer (rate = 0.1)
+6: Dense layer (size = 1, activation = sigmoid)
+
+Optimizer: adam (stochastic gradient descent)
+Loss: binary cross-entropy
+
+Epochs: 7
+
+Results:
+
+    Train for 396 steps
+    Epoch 1/7
+    396/396 [==============================] - 1s 3ms/step - loss: 3.2281 - accuracy: 0.5404
+    Epoch 2/7
+    396/396 [==============================] - 0s 1ms/step - loss: 1.1637 - accuracy: 0.5808
+    Epoch 3/7
+    396/396 [==============================] - 0s 1ms/step - loss: 0.7215 - accuracy: 0.5783
+    Epoch 4/7
+    396/396 [==============================] - 0s 1ms/step - loss: 0.6700 - accuracy: 0.6212
+    Epoch 5/7
+    396/396 [==============================] - 0s 1ms/step - loss: 0.6480 - accuracy: 0.6086
+    Epoch 6/7
+    396/396 [==============================] - 0s 1ms/step - loss: 0.6379 - accuracy: 0.6389
+    Epoch 7/7
+    396/396 [==============================] - 0s 1ms/step - loss: 0.6253 - accuracy: 0.6313
+    66/66 - 0s - loss: 0.5842 - accuracy: 0.6970
+    Model Loss:     0.58
+    Model Accuracy: 69.7%
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ AFTER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+TBD
