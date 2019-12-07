@@ -1,6 +1,5 @@
 import tensorflow as tf
 from tensorflow import keras
-import numpy as np
 
 print("--Get data--")
 mnist = keras.datasets.mnist
@@ -26,5 +25,4 @@ model_loss, model_acc = model.evaluate(x_test,  y_test, verbose=2)
 print(f"Model Loss:    {model_loss:.2f}")
 print(f"Model Accuracy: {model_acc*100:.1f}%")
 
-#Save Model
-model.save("Part1/MNIST_4.h5")
+#model.save("MNIST.h5")
